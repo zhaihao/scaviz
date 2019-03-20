@@ -5,16 +5,16 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package me.ooon.scaviz
-import scala.language.implicitConversions
+package plot.dsl
+import plot.{HtmlRenderer, Vega}
 
 /**
-  * package
+  * RenderDSL
   *
   * @author zhaihao
   * @version 1.0
-  * @since 2019-03-20 11:31
+  * @since 2019-03-22 16:22
   */
-package object vega {
-  implicit def anyToOption[T](t: T)   = Option(t)
+trait RenderDSL { this: Vega =>
+  def html = new HtmlRenderer(this)
 }

@@ -1,0 +1,55 @@
+import me.ooon.base.test.PreviewLike
+import play.api.libs.json.{Json, Writes}
+
+import scala.language.implicitConversions
+/*
+ * Copyright (c) 2019.
+ * OOON.ME ALL RIGHTS RESERVED.
+ * Licensed under the Mozilla Public License, version 2.0
+ * Please visit http://ooon.me or mail to zhaihao@ooon.me
+ */
+
+/**
+  * package
+  *
+  * @author zhaihao
+  * @version 1.0
+  * @since 2019-03-22 11:32
+  */
+package object plot {
+
+  /**
+    * @see [[https://vega.github.io/vega-lite/usage/embed.html#cdn]]
+    */
+  val VEGA_VERSION      = "5.3.0"
+  val VEGA_LITE_VERSION = "3.0.0-rc15"
+  val VEGA_EMBED        = "4.0.0-rc1"
+  val SCHEMA_VERSION = "v3"
+  // 入口
+  def vega = Vega()
+
+  //type alias
+  type Theme = String
+
+  // make all implicit in plot._
+  implicit def antToOption[T](t: T) = me.ooon.base.option.antToOption(t)
+
+  object PJson {
+
+    def json[T](o: T)(implicit tjs: Writes[T]) = {
+      Json.prettyPrint(Json.toJson(o))
+    }
+  }
+
+  implicit def json2PJson(json: Json.type) = PJson
+
+  implicit class BrowseAble(render: HtmlRenderer) extends PreviewLike {
+
+    def browse = {
+      val tmp = os.temp(suffix = ".html", deleteOnExit = false)
+      os.write.over(tmp, render.page)
+      preview(tmp.toIO)
+    }
+  }
+  // implicit end
+}

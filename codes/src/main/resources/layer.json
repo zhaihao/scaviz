@@ -1,0 +1,25 @@
+{
+  "data": {"url": "data/stocks.csv"},
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "price", "type": "quantitative"},
+        "color": {"field": "symbol", "type": "nominal"}
+      }
+    },
+    {
+      "mark": "rule",
+      "encoding": {
+        "y": {
+          "field": "price",
+          "type": "quantitative",
+          "aggregate": "mean"
+        },
+        "size": {"value": 2},
+        "color": {"field": "symbol", "type": "nominal"}
+      }
+    }
+  ]
+}

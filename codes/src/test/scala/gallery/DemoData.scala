@@ -5,20 +5,15 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package me.ooon.scaviz.vega
-import me.ooon.base.test.BaseSpec
+package gallery
 
 /**
-  * ThemeSpec
+  * DemoData
   *
   * @author zhaihao
   * @version 1.0
-  * @since 2019-03-20 15:54
+  * @since 2019-03-21 17:55
   */
-class ThemeSpec extends BaseSpec {
-
-  "test theme" in {
-    Theme.vox.toString ==> "vox"
-  }
-
+object DemoData {
+  val Cars = "https://vega.github.io/editor/data/cars.json"
 }

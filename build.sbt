@@ -3,12 +3,12 @@ import sbt.Keys.scalacOptions
 scalaVersion in Global := "2.12.8"
 organization in Global := "me.ooon"
 
-scalacOptions in Global ++= Seq("-unchecked", "-deprecation", "-feature")
+scalacOptions in Global ++= Seq("-unchecked", "-deprecation", "-feature", "-Xfatal-warnings")
 resolvers in Global += "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository"
 resolvers in Global += Resolver.url("ooon ivy repo", url("https://repo.ooon.me/release"))(
   Resolver.ivyStylePatterns)
 externalResolvers in Global := Resolver.combineDefaultResolvers(resolvers.value.toVector,
-  mavenCentral = true)
+                                                                mavenCentral = true)
 
 libraryDependencies in Global ++= Seq(base, scalatest)
 libraryDependencies in Global ++= log
@@ -34,7 +34,7 @@ lazy val codes = (project in file("codes"))
     moduleName := "codes",
     name       := "scaviz - Code Sources",
     libraryDependencies ++= Seq().flatten,
-    libraryDependencies ++= Seq(play_json),
+    libraryDependencies ++= Seq(play_json, os_lib),
     scalacOptions in (Compile, doc) ++= Seq(
       "-diagrams",
       "-implicits",
@@ -82,8 +82,8 @@ lazy val docs = (project in file("docs"))
         .withCopyright("© zhaihao")
         .withRepository(uri("https://github.com/zhaihao/scaviz"))
         .withSocial(uri("https://github.com/zhaihao"),
-          uri("https://twitter.com/zhaihaoooon"),
-          uri("https://www.facebook.com/zhaihaome"))
+                    uri("https://twitter.com/zhaihaoooon"),
+                    uri("https://www.facebook.com/zhaihaome"))
         .withLanguage(java.util.Locale.CHINESE)
         .withCustomStylesheet("assets/custom.css")
     },

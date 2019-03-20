@@ -5,13 +5,22 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package me.ooon.scaviz.vega
+package plot.dsl
+import plot.spec.Mark
 
 /**
-  * Vega
+  * MarkDSL
   *
   * @author zhaihao
   * @version 1.0
-  * @since 2019-03-20 16:11
+  * @since 2019-03-22 14:51
   */
-case class Vega(name: String, description: String)
+trait MarkDSL {
+  protected var mark: Mark = _
+
+  def mark(mark: Mark): this.type = {
+    this.mark = mark
+    this
+  }
+
+}

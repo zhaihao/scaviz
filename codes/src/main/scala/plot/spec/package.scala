@@ -5,15 +5,16 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package me.ooon.scaviz.dsl
+package plot
 
 /**
- * DataDSL 
- *
- * @author zhaihao
- * @version 1.0 
- * @since 2019-03-20 11:49
- */
-trait DataDSL {
-
+  * package
+  *
+  * @author zhaihao
+  * @version 1.0
+  * @since 2019-03-21 18:00
+  */
+package object spec {
+  // type alias
+  type Theme = String
 }
