@@ -18,6 +18,7 @@ import me.ooon.base.test.BaseSpec
 class ThemeSpec extends BaseSpec {
 
   "test theme" in {
-    Theme.Vox ==> "vox"
+    Theme.vox.toString ==> "vox"
   }
+
 }

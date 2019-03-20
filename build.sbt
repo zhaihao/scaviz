@@ -34,7 +34,7 @@ lazy val codes = (project in file("codes"))
     moduleName := "codes",
     name       := "scaviz - Code Sources",
     libraryDependencies ++= Seq().flatten,
-    libraryDependencies ++= Seq(),
+    libraryDependencies ++= Seq(play_json),
     scalacOptions in (Compile, doc) ++= Seq(
       "-diagrams",
       "-implicits",

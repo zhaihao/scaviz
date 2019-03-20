@@ -26,10 +26,10 @@ object Dependencies extends AutoPlugin {
     lazy val requests  = "com.lihaoyi"       %% "requests"      % "0.1.7"
     lazy val play_json = "com.typesafe.play" %% "play-json"     % "2.7.1"
     lazy val scraper   = "net.ruippeixotog"  %% "scala-scraper" % "2.1.0"
-    //lazy val spire     = "org.typelevel"     %% "spire"         % "0.16.0"
     lazy val scalaz    = "org.scalaz"        %% "scalaz-core"   % "7.2.27"
     lazy val vegas     = "org.vegas-viz"     %% "vegas"         % "0.3.12-om"
     lazy val squants   = "org.typelevel"     %% "squants"       % "1.4.0"
+    //lazy val spire     = "org.typelevel"     %% "spire"         % "0.16.0"
 
     lazy val log = Seq(
       "com.typesafe.scala-logging" %% "scala-logging"  % "3.9.2",

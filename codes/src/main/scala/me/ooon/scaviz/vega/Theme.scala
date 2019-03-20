@@ -6,6 +6,7 @@
  */
 
 package me.ooon.scaviz.vega
+import me.ooon.scaviz.util.EnumUtil
 
 /**
   * Theme
@@ -15,13 +16,8 @@ package me.ooon.scaviz.vega
   * @since 2019-03-20 15:53
   * @see [[https://github.com/vega/vega-themes/blob/master/src/index.ts]]
   */
-object Theme {
+object Theme extends Enumeration {
+  val excel, ggplot2, quartz, vox, dark, fivethirtyeight, latimes = Value
 
-  val Excel:           Theme = "excel"
-  val GGPlot2:         Theme = "ggplot2"
-  val Quartz:          Theme = "quartz"
-  val Vox:             Theme = "vox"
-  val Dark:            Theme = "dark"
-  val FiveThirtyEight: Theme = "fivethirtyeight"
-  val LaTimes:         Theme = "latimes"
+  implicit val ThemeFormat = EnumUtil.enumFormat(Theme)
 }

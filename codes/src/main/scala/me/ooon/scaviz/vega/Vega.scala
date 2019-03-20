@@ -5,16 +5,13 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package me.ooon.scaviz
-import scala.language.implicitConversions
+package me.ooon.scaviz.vega
 
 /**
-  * package
+  * Vega
   *
   * @author zhaihao
   * @version 1.0
-  * @since 2019-03-20 11:31
+  * @since 2019-03-20 16:11
   */
-package object vega {
-  implicit def anyToOption[T](t: T)   = Option(t)
-}
+case class Vega(name: String, description: String)
