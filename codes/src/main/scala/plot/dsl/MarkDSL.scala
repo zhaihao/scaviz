@@ -16,7 +16,7 @@ import plot.spec.Mark
   * @since 2019-03-22 14:51
   */
 trait MarkDSL {
-  protected var mark: Mark = _
+  protected var mark: Option[Mark] = None
 
   def mark(mark: Mark): this.type = {
     this.mark = mark

@@ -21,15 +21,16 @@ package object plot {
   /**
     * @see [[https://vega.github.io/vega-lite/usage/embed.html#cdn]]
     */
-  val VEGA_VERSION      = "5.3.0"
-  val VEGA_LITE_VERSION = "3.0.0-rc15"
+  val VEGA_VERSION      = "5.3.1"
+  val VEGA_LITE_VERSION = "3.0.0"
   val VEGA_EMBED        = "4.0.0-rc1"
-  val SCHEMA_VERSION = "v3"
+  val SCHEMA_VERSION    = "v3"
   // 入口
   def vega = Vega()
 
   //type alias
-  type Theme = String
+  type Theme     = String
+  type FieldType = String
 
   // make all implicit in plot._
   implicit def antToOption[T](t: T) = me.ooon.base.option.antToOption(t)

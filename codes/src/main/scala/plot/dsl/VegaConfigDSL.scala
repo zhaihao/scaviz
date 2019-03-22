@@ -7,7 +7,8 @@
 
 package plot.dsl
 
-import plot.spec.{Theme, Themes, VegaConfig}
+import plot.Theme
+import plot.spec.{Themes, VegaConfig}
 
 /**
   * VegaConfigDSL

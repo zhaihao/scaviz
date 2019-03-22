@@ -16,10 +16,10 @@ import plot.spec.Data
   * @since 2019-03-22 10:44
   */
 trait DataDSL {
-  protected var data: Data = Data()
+  protected var data: Option[Data] = None
 
   def data(url: Option[String] = None, values: Option[Seq[Map[String, Any]]] = None): this.type = {
-    this.data = data.copy(url = url, values = values)
+    data = Option(Data(url, values))
     this
   }
 }

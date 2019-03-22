@@ -6,6 +6,7 @@
  */
 
 package plot.spec
+import plot.Theme
 
 /**
   * VegaConfig

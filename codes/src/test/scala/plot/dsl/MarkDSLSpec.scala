@@ -24,7 +24,7 @@ import plot._
   "mark dsl test" in {
    val v = plot.vega.data(DemoData.Cars).mark(Mark.Area)
    Json.prettyPrint(Json.toJson(v)) ==> """|{
-                                           |  "$schema" : "https://vega.github.io/schema/vega-lite/v3.0.0-rc15.json",
+                                           |  "$schema" : "https://vega.github.io/schema/vega-lite/v3.json",
                                            |  "data" : {
                                            |    "url" : "https://vega.github.io/editor/data/cars.json"
                                            |  },

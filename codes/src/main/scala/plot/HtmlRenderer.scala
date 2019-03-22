@@ -6,7 +6,6 @@
  */
 
 package plot
-import java.util.UUID
 
 import play.api.libs.json.Json
 
@@ -41,12 +40,12 @@ class HtmlRenderer(vega: Vega) {
                          |</head>
                          |""".stripMargin
 
-  private val uuid = UUID.randomUUID()
-  private val body = s"""|<body style="text-align: center;">
-                         |    <div id=$uuid></div>
+  private val longId = System.currentTimeMillis()
+  private val body   = s"""|<body style="text-align: center;">
+                         |    <div id="viz$longId"></div>
                          |    <script type="text/javascript">
-                         |        var specJson = ${Json.toJson(vega)};
-                         |        vegaEmbed('#$uuid', specJson, {theme: '${vega.config.theme}', defaultStyle: true}).catch(console.warn);
+                         |        var specJson = ${Json.json(vega)};
+                         |        vegaEmbed('#viz$longId', specJson, {theme: '${vega.config.theme}', defaultStyle: true}).catch(console.warn);
                          |    </script>
                          |</body>
                          |""".stripMargin

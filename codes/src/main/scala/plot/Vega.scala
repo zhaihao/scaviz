@@ -7,7 +7,7 @@
 
 package plot
 import play.api.libs.json.{JsObject, JsString, Json, Writes}
-import plot.dsl.{DataDSL, MarkDSL, RenderDSL, VegaConfigDSL}
+import plot.dsl._
 
 /**
   * Vega
@@ -16,7 +16,7 @@ import plot.dsl.{DataDSL, MarkDSL, RenderDSL, VegaConfigDSL}
   * @version 1.0
   * @since 2019-03-22 11:34
   */
-class Vega extends VegaConfigDSL with DataDSL with MarkDSL with RenderDSL {
+class Vega extends VegaConfigDSL with DataDSL with MarkDSL with RenderDSL with EncodingDSL {
   val schema = s"https://vega.github.io/schema/vega-lite/$SCHEMA_VERSION.json"
 }
 
@@ -27,11 +27,10 @@ object Vega {
   implicit val VegaWrite = new Writes[Vega] {
     override def writes(o: Vega) =
       JsObject(
-        Seq(
-          "$schema" -> JsString(o.schema),
-          "data"    -> Json.toJson(o.data),
-          "mark"    -> Json.toJson(o.mark)
-        )
+        Seq("$schema"               -> JsString(o.schema)) ++
+          o.data.map("data" -> Json.toJson(_)) ++
+          o.mark.map("mark" -> Json.toJson(_)) ++
+          o.encoding.map("encoding" -> Json.toJson(_))
       )
   }
 }

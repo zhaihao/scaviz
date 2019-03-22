@@ -39,7 +39,18 @@ class GettingStartedSpec extends BaseSpec {
         .config(title = "Encoding Data with Marks", theme = Themes.Quartz)
         .data(values = values)
         .mark(Mark.Point)
-        .html.browse
+        .html
+        .browse
+    }
+
+    "gallery 2" in {
+      plot.vega
+        .config(title = "Encoding Data with Marks", theme = Themes.Quartz)
+        .data(values = values)
+        .mark(Mark.Point)
+        .encodeX("a", FieldType.Nominal)
+        .html
+        .browse
     }
   }
 }
