@@ -11,6 +11,8 @@ import me.ooon.base.test.BaseSpec
 import play.api.libs.json.Json
 import plot.spec.{FieldType, Mark}
 import plot._
+import plot.spec.transform.AggOp
+import scala.language.existentials
 
 /**
   * EncodingDSLSpec
@@ -43,6 +45,21 @@ class EncodingDSLSpec extends BaseSpec {
                         |    "y" : {
                         |      "field" : "b",
                         |      "type" : "ordinal"
+                        |    }
+                        |  }
+                        |}""".stripMargin
+  }
+
+  "test encoding with agg" in {
+    val v = plot.vega.encodeX("a", FieldType.Quantitative, AggOp.Count)
+
+    Json.json(v) ==> """|{
+                        |  "$schema" : "https://vega.github.io/schema/vega-lite/v3.json",
+                        |  "encoding" : {
+                        |    "x" : {
+                        |      "field" : "a",
+                        |      "type" : "quantitative",
+                        |      "aggregate" : "count"
                         |    }
                         |  }
                         |}""".stripMargin

@@ -6,7 +6,7 @@
  */
 
 package plot.dsl
-import plot.FieldType
+import plot.{AggOp, FieldType}
 import plot.spec.{Encode, Encoding}
 
 /**
@@ -20,16 +20,16 @@ trait EncodingDSL {
 
   protected var encoding: Option[Encoding] = None
 
-  def encodeX(field: String, `type`: FieldType): this.type = {
-    if (encoding.isEmpty) encoding = Encoding(x = Encode(field, `type`))
-    else encoding                  = encoding.map(_.copy(x = Encode(field, `type`)))
+  def encodeX(field: String, `type`: FieldType, aggregate: Option[AggOp] = None): this.type = {
+    if (encoding.isEmpty) encoding = Encoding(x = Encode(field, `type`, aggregate))
+    else encoding                  = encoding.map(_.copy(x = Encode(field, `type`, aggregate)))
 
     this
   }
 
-  def encodeY(field: String, `type`: FieldType): this.type = {
-    if (encoding.isEmpty) encoding = Encoding(y = Encode(field, `type`))
-    else encoding                  = encoding.map(_.copy(y = Encode(field, `type`)))
+  def encodeY(field: String, `type`: FieldType, aggregate: Option[AggOp] = None): this.type = {
+    if (encoding.isEmpty) encoding = Encoding(y = Encode(field, `type`, aggregate))
+    else encoding                  = encoding.map(_.copy(y = Encode(field, `type`, aggregate)))
 
     this
   }

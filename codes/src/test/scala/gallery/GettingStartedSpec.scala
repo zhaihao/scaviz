@@ -8,6 +8,7 @@
 package gallery
 import me.ooon.base.test.BaseSpec
 import plot.spec.Themes
+import plot.spec.transform.AggOp
 
 /**
   * GettingStartedSpec
@@ -45,12 +46,51 @@ class GettingStartedSpec extends BaseSpec {
 
     "gallery 2" in {
       plot.vega
-        .config(title = "Encoding Data with Marks", theme = Themes.Quartz)
+        .config(theme = Themes.Quartz)
         .data(values = values)
         .mark(Mark.Point)
         .encodeX("a", FieldType.Nominal)
         .html
         .browse
+    }
+
+    "gallery 3" in {
+      plot.vega
+        .config(theme = Themes.Default)
+        .data(values = values)
+        .mark(Mark.Point)
+        .encodeX("a", FieldType.Nominal)
+        .encodeY("b", FieldType.Quantitative)
+        .html
+        .browse
+    }
+
+    "Data Transformation: Aggregation" - {
+      "gallery 1" in {
+        plot.vega
+          .config(theme = Themes.Default)
+          .data(values = values)
+          .mark(Mark.Bar)
+          .encodeX("a", FieldType.Nominal)
+          .encodeY("b", FieldType.Quantitative, AggOp.Average)
+          .html
+          .browse
+      }
+
+      "gallery 2" in {
+        plot.vega
+          .config(theme = Themes.Default)
+          .data(values = values)
+          .mark(Mark.Bar)
+          .encodeY("a", FieldType.Nominal)
+          .encodeX("b", FieldType.Quantitative, AggOp.Average)
+          .html
+          .browse
+      }
+    }
+
+    "Customize your Visualization" - {
+
     }
   }
 }
