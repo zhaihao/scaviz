@@ -16,4 +16,5 @@ package gallery
   */
 object DemoData {
   val Cars = "https://vega.github.io/editor/data/cars.json"
+  val Weather = "https://vega.github.io/editor/data/seattle-weather.csv"
 }
