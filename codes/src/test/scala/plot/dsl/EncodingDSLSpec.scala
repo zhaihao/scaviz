@@ -11,7 +11,8 @@ import me.ooon.base.test.BaseSpec
 import play.api.libs.json.Json
 import plot.spec.{FieldType, Mark}
 import plot._
-import plot.spec.transform.AggOp
+import plot.spec.encoding.AggOp
+
 import scala.language.existentials
 
 /**

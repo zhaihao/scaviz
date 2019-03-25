@@ -5,7 +5,8 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package plot.spec.transform
+package plot.spec.encoding
+
 import play.api.libs.json.Json
 
 /**

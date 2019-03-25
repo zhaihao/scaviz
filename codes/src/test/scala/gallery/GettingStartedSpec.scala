@@ -7,7 +7,7 @@
 
 package gallery
 import me.ooon.base.test.BaseSpec
-import plot.spec.transform.{AggOp, Axis}
+import plot.spec.encoding.{AggOp, Axis}
 
 /**
   * GettingStartedSpec

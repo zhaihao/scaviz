@@ -7,6 +7,7 @@
 
 package gallery
 import me.ooon.base.test.BaseSpec
+import plot.spec.encoding.AggOp
 import plot.spec.{FieldType, Mark}
 
 /**
@@ -23,6 +24,16 @@ class ExploringDataSpec extends BaseSpec {
       .data(DemoData.Weather)
       .mark(Mark.Tick)
       .encodeX("precipitation", FieldType.Quantitative)
+      .html
+      .browse
+  }
+
+  "gallery 2" in {
+    plot.vega
+      .data(DemoData.Weather)
+      .mark(Mark.Bar)
+      .encodeX("precipitation", FieldType.Quantitative, bin = true)
+      .encodeY(`type` = FieldType.Quantitative, aggregate = AggOp.Count)
       .html
       .browse
   }

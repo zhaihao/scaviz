@@ -7,7 +7,7 @@
 
 package plot.spec
 import play.api.libs.json.Json
-import plot.spec.transform.Axis
+import plot.spec.encoding.Axis
 import plot.{AggOp, FieldType}
 
 /**
@@ -22,7 +22,8 @@ case class Encoding(x: Option[Encode] = None, y: Option[Encode] = None)
 case class Encode(field:     String,
                   `type`:    FieldType,
                   aggregate: Option[AggOp] = None,
-                  axis:      Option[Axis] = None)
+                  axis:      Option[Axis] = None,
+                  bin:       Option[Boolean] = None)
 
 object FieldType {
   val Nominal:      FieldType = "nominal"      // 离散
