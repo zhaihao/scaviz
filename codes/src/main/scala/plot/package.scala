@@ -32,6 +32,7 @@ package object plot {
   type Theme     = String
   type FieldType = String
   type AggOp     = String
+  type TimeUnit  = String
 
   // make all implicit in plot._
   implicit def antToOption[T](t: T) = me.ooon.base.option.antToOption(t)

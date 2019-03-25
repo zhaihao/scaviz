@@ -8,7 +8,7 @@
 package plot.dsl
 import plot.spec.encoding.Axis
 import plot.spec.{Encode, Encoding}
-import plot.{AggOp, FieldType}
+import plot.{AggOp, FieldType, TimeUnit}
 
 /**
   * EncodingDSL
@@ -25,9 +25,11 @@ trait EncodingDSL {
               `type`:    FieldType,
               aggregate: Option[AggOp] = None,
               axis:      Option[Axis] = None,
-              bin:       Option[Boolean] = None): this.type = {
-    if (encoding.isEmpty) encoding = Encoding(x = Encode(field, `type`, aggregate, axis, bin))
-    else encoding = encoding.map(_.copy(x = Encode(field, `type`, aggregate, axis, bin)))
+              bin:       Option[Boolean] = None,
+              timeUnit:  Option[TimeUnit] = None): this.type = {
+    if (encoding.isEmpty)
+      encoding = Encoding(x = Encode(field, `type`, aggregate, axis, bin, timeUnit))
+    else encoding = encoding.map(_.copy(x = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
 
     this
   }
@@ -36,9 +38,11 @@ trait EncodingDSL {
               `type`:    FieldType,
               aggregate: Option[AggOp] = None,
               axis:      Option[Axis] = None,
-              bin:       Option[Boolean] = None): this.type = {
-    if (encoding.isEmpty) encoding = Encoding(y = Encode(field, `type`, aggregate, axis, bin))
-    else encoding = encoding.map(_.copy(y = Encode(field, `type`, aggregate, axis, bin)))
+              bin:       Option[Boolean] = None,
+              timeUnit:  Option[TimeUnit] = None): this.type = {
+    if (encoding.isEmpty)
+      encoding = Encoding(y = Encode(field, `type`, aggregate, axis, bin, timeUnit))
+    else encoding = encoding.map(_.copy(y = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
 
     this
   }

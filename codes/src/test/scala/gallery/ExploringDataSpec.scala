@@ -7,7 +7,7 @@
 
 package gallery
 import me.ooon.base.test.BaseSpec
-import plot.spec.encoding.AggOp
+import plot.spec.encoding.{AggOp, TimeUnit}
 import plot.spec.{FieldType, Mark}
 
 /**
@@ -37,4 +37,25 @@ class ExploringDataSpec extends BaseSpec {
       .html
       .browse
   }
+
+  "gallery 3" in {
+    plot.vega
+      .data(DemoData.Weather)
+      .mark(Mark.Line)
+      .encodeX(field = "date", `type` = FieldType.Temporal, timeUnit = TimeUnit.Month)
+      .encodeY(field = "precipitation", `type` = FieldType.Quantitative, aggregate = AggOp.Mean)
+      .html
+      .browse
+  }
+
+  "gallery 4" in {
+    plot.vega
+      .data(DemoData.Weather)
+      .mark(Mark.Line)
+      .encodeX(field = "date", `type` = FieldType.Temporal, timeUnit = TimeUnit.YearMonth)
+      .encodeY(field = "temp_max", `type` = FieldType.Quantitative, aggregate = AggOp.Max)
+      .html
+      .browse
+  }
+
 }
