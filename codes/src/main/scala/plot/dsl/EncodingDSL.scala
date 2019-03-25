@@ -6,8 +6,9 @@
  */
 
 package plot.dsl
-import plot.{AggOp, FieldType}
+import plot.spec.transform.Axis
 import plot.spec.{Encode, Encoding}
+import plot.{AggOp, FieldType}
 
 /**
   * EncodingDSL
@@ -20,16 +21,22 @@ trait EncodingDSL {
 
   protected var encoding: Option[Encoding] = None
 
-  def encodeX(field: String, `type`: FieldType, aggregate: Option[AggOp] = None): this.type = {
-    if (encoding.isEmpty) encoding = Encoding(x = Encode(field, `type`, aggregate))
-    else encoding                  = encoding.map(_.copy(x = Encode(field, `type`, aggregate)))
+  def encodeX(field:     String,
+              `type`:    FieldType,
+              aggregate: Option[AggOp] = None,
+              axis:      Option[Axis] = None): this.type = {
+    if (encoding.isEmpty) encoding = Encoding(x = Encode(field, `type`, aggregate, axis))
+    else encoding                  = encoding.map(_.copy(x = Encode(field, `type`, aggregate, axis)))
 
     this
   }
 
-  def encodeY(field: String, `type`: FieldType, aggregate: Option[AggOp] = None): this.type = {
-    if (encoding.isEmpty) encoding = Encoding(y = Encode(field, `type`, aggregate))
-    else encoding                  = encoding.map(_.copy(y = Encode(field, `type`, aggregate)))
+  def encodeY(field:     String,
+              `type`:    FieldType,
+              aggregate: Option[AggOp] = None,
+              axis:      Option[Axis] = None): this.type = {
+    if (encoding.isEmpty) encoding = Encoding(y = Encode(field, `type`, aggregate, axis))
+    else encoding                  = encoding.map(_.copy(y = Encode(field, `type`, aggregate, axis)))
 
     this
   }

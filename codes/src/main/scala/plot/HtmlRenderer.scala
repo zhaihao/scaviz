@@ -7,6 +7,7 @@
 
 package plot
 
+import com.typesafe.scalalogging.StrictLogging
 import play.api.libs.json.Json
 
 /**
@@ -22,7 +23,9 @@ import play.api.libs.json.Json
   * @author zhaihao
   * @version 1.0 2019-03-20 20:36
   */
-class HtmlRenderer(vega: Vega) {
+class HtmlRenderer(vega: Vega) extends StrictLogging {
+
+  logger.debug("\n" + Json.json(vega))
 
   private val style = """|<style>
                          |    #vg-tooltip-element table {
