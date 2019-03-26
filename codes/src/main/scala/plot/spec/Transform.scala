@@ -5,26 +5,24 @@
  * Please visit http://ooon.me or mail to zhaihao@ooon.me
  */
 
-package plot.spec.transform
-import play.api.libs.json.{JsValue, Json, Writes}
+package plot.spec
+import play.api.libs.json.{JsValue, Writes}
+import plot.spec.transform.Calculate
 
 /**
   * Transform
   *
   * @author zhaihao
   * @version 1.0
-  * @since 2019-03-26 14:46
+  * @since 2019-03-26 17:33
   */
-sealed trait Transform
-
-case class Calculate(calculate: String, as: String) extends Transform
+trait Transform
 
 object Transform {
-  implicit val CalculateFormat = Json.format[Calculate]
 
   implicit val TransformWrite = new Writes[Transform] {
     override def writes(o: Transform): JsValue = o match {
-      case a: Calculate => CalculateFormat.writes(a)
+      case a: Calculate => Calculate.CalculateFormat.writes(a)
       case _ => throw new Exception("transform is unsupported!")
     }
   }

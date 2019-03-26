@@ -23,7 +23,8 @@ case class Vega(width: Option[Int] = None, height: Option[Int] = None)
     with RenderDSL
     with EncodingDSL
     with TitleDSL
-    with TransformDSL {
+    with TransformDSL
+    with DescriptionDSL {
   val schema = s"https://vega.github.io/schema/vega-lite/$SCHEMA_VERSION.json"
 }
 

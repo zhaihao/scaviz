@@ -6,9 +6,9 @@
  */
 
 package plot.dsl
-import plot.spec.encoding.Axis
-import plot.spec.{Encode, Encoding, Legend, Scale}
-import plot.{AggOp, FieldType, TimeUnit}
+import plot.spec.encoding.{Axis, Bin, Legend, Scale}
+import plot.spec.{Encode, Encoding}
+import plot.{AggOp, FieldType, TimeUnit, _}
 
 /**
   * EncodingDSL
@@ -21,36 +21,49 @@ trait EncodingDSL {
 
   protected var encoding: Option[Encoding] = None
 
-  def encodeX(field:     String = "*",
-              `type`:    FieldType,
-              aggregate: Option[AggOp] = None,
-              axis:      Option[Axis] = None,
-              bin:       Option[Boolean] = None,
-              timeUnit:  Option[TimeUnit] = None): this.type = {
+  def encodeX(field:     Option[String]    = None,
+              `type`:    Option[FieldType] = None,
+              aggregate: Option[AggOp]     = None,
+              axis:      Option[Axis]      = None,
+              bin:       Option[Bin]       = None,
+              timeUnit:  Option[TimeUnit]  = None): this.type = {
     if (encoding.isEmpty)
-      encoding = Encoding(x = Encode(field, `type`, aggregate, axis, bin, timeUnit))
+      encoding    = Encoding(x = Encode(field, `type`, aggregate, axis, bin, timeUnit))
     else encoding = encoding.map(_.copy(x = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
 
     this
   }
 
-  def encodeY(field:     String = "*",
-              `type`:    FieldType,
-              aggregate: Option[AggOp] = None,
-              axis:      Option[Axis] = None,
-              bin:       Option[Boolean] = None,
-              timeUnit:  Option[TimeUnit] = None): this.type = {
+  def encodeX2(field:     Option[String]    = None,
+               `type`:    Option[FieldType] = None,
+               aggregate: Option[AggOp]     = None,
+               axis:      Option[Axis]      = None,
+               bin:       Option[Bin]       = None,
+               timeUnit:  Option[TimeUnit]  = None): this.type = {
     if (encoding.isEmpty)
-      encoding = Encoding(y = Encode(field, `type`, aggregate, axis, bin, timeUnit))
+      encoding    = Encoding(x2 = Encode(field, `type`, aggregate, axis, bin, timeUnit))
+    else encoding = encoding.map(_.copy(x2 = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
+
+    this
+  }
+
+  def encodeY(field:     Option[String]    = None,
+              `type`:    Option[FieldType] = None,
+              aggregate: Option[AggOp]     = None,
+              axis:      Option[Axis]      = None,
+              bin:       Option[Bin]       = None,
+              timeUnit:  Option[TimeUnit]  = None): this.type = {
+    if (encoding.isEmpty)
+      encoding    = Encoding(y = Encode(field, `type`, aggregate, axis, bin, timeUnit))
     else encoding = encoding.map(_.copy(y = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
 
     this
   }
 
-  def encodeColor(field:  String,
-                  `type`: FieldType,
-                  scale:  Option[Scale] = None,
-                  legend: Option[Legend] = None): this.type = {
+  def encodeColor(field:  Option[String]    = None,
+                  `type`: Option[FieldType] = None,
+                  scale:  Option[Scale]     = None,
+                  legend: Option[Legend]    = None): this.type = {
     if (encoding.isEmpty)
       encoding = Encoding(color = Encode(field, `type`, scale = scale, legend = legend))
     else

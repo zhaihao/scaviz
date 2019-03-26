@@ -7,7 +7,8 @@
 
 package plot.dsl
 import plot._
-import plot.spec.transform.{Calculate, Transform}
+import plot.spec.Transform
+import plot.spec.transform.Calculate
 
 /**
   * TransformDSL
