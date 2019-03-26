@@ -49,11 +49,33 @@ class ExploringDataSpec extends BaseSpec {
   }
 
   "gallery 4" in {
-    plot.vega
+    plot
+      .vega()
       .data(DemoData.Weather)
       .mark(Mark.Line)
       .encodeX(field = "date", `type` = FieldType.Temporal, timeUnit = TimeUnit.YearMonth)
       .encodeY(field = "temp_max", `type` = FieldType.Quantitative, aggregate = AggOp.Max)
+      .html
+      .browse
+  }
+
+  "gallery 5" in {
+    plot.vega
+      .data(DemoData.Weather)
+      .mark(Mark.Line)
+      .encodeX(field = "date", `type` = FieldType.Temporal, timeUnit = TimeUnit.Year)
+      .encodeY(field = "temp_max", `type` = FieldType.Quantitative, aggregate = AggOp.Max)
+      .html
+      .browse
+  }
+
+  "gallery 6" in {
+    plot.vega
+      .data(DemoData.Weather)
+      .calculate("datum.temp_max - datum.temp_min", "temp_range")
+      .mark(Mark.Line)
+      .encodeX(field = "date", `type` = FieldType.Temporal, timeUnit = TimeUnit.Month)
+      .encodeY(field = "temp_range", `type` = FieldType.Quantitative, aggregate = AggOp.Mean)
       .html
       .browse
   }

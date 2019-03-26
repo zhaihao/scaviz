@@ -6,7 +6,7 @@
  */
 
 package plot
-import play.api.libs.json.{JsObject, JsString, Json, Writes}
+import play.api.libs.json._
 import plot.dsl._
 
 /**
@@ -16,21 +16,68 @@ import plot.dsl._
   * @version 1.0
   * @since 2019-03-22 11:34
   */
-class Vega extends VegaConfigDSL with DataDSL with MarkDSL with RenderDSL with EncodingDSL {
+case class Vega(width: Option[Int] = None, height: Option[Int] = None)
+    extends VegaConfigDSL
+    with DataDSL
+    with MarkDSL
+    with RenderDSL
+    with EncodingDSL
+    with TitleDSL
+    with TransformDSL {
   val schema = s"https://vega.github.io/schema/vega-lite/$SCHEMA_VERSION.json"
+}
+
+case class Title(text:       Option[String]      = None,
+                 anchor:     Option[TitleAnchor] = None,
+                 angle:      Option[Double]      = None,
+                 baseline:   Option[BaseLine]    = None,
+                 color:      Option[String]      = None,
+                 font:       Option[String]      = None,
+                 fontSize:   Option[Int]         = None,
+                 fontWeight: Option[Int]         = None,
+                 frame:      Option[String]      = None,
+                 limit:      Option[Int]         = None,
+                 offset:     Option[Int]         = None,
+                 orient:     Option[Orient]      = None,
+                 zindex:     Option[Int]         = None)
+
+object Title {
+  implicit val TitleFormat = Json.format[Title]
+}
+
+object TitleAnchor {
+  val Start:  TitleAnchor = "start"
+  val Middle: TitleAnchor = "middle"
+  val End:    TitleAnchor = "end"
+}
+
+object BaseLine {
+  val Top:        BaseLine = "top"
+  val Middle:     BaseLine = "middle"
+  val Bottom:     BaseLine = "bottom"
+  val Alphabetic: BaseLine = "alphabetic"
+}
+
+object Orient {
+  val Top:    Orient = "top"
+  val Bottom: Orient = "bottom"
+  val Left:   Orient = "left"
+  val Right:  Orient = "right"
 }
 
 object Vega {
 
-  def apply(): Vega = new Vega()
-
   implicit val VegaWrite = new Writes[Vega] {
     override def writes(o: Vega) =
       JsObject(
-        Seq("$schema"               -> JsString(o.schema)) ++
-          o.data.map("data" -> Json.toJson(_)) ++
-          o.mark.map("mark" -> Json.toJson(_)) ++
-          o.encoding.map("encoding" -> Json.toJson(_))
+        Seq("$schema"                 -> JsString(o.schema)) ++
+          o.width.map("width"         -> JsNumber(_)) ++
+          o.height.map("height"       -> JsNumber(_)) ++
+          o.title.map("title"         -> Json.toJson(_)) ++
+          o.data.map("data"           -> Json.toJson(_)) ++
+          o.mark.map("mark"           -> Json.toJson(_)) ++
+          o.encoding.map("encoding"   -> Json.toJson(_)) ++
+          o.transform.map("transform" -> Json.toJson(_))
       )
   }
 }

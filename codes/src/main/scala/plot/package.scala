@@ -26,13 +26,17 @@ package object plot {
   val VEGA_EMBED        = "4.0.0-rc1"
   val SCHEMA_VERSION    = "v3"
   // 入口
+  def vega(width: Option[Int] = None, height: Option[Int] = None) = Vega(width, height)
   def vega = Vega()
 
   //type alias
-  type Theme     = String
-  type FieldType = String
-  type AggOp     = String
-  type TimeUnit  = String
+  type Theme       = String
+  type FieldType   = String
+  type AggOp       = String
+  type TimeUnit    = String
+  type TitleAnchor = String
+  type BaseLine    = String
+  type Orient      = String
 
   // make all implicit in plot._
   implicit def antToOption[T](t: T) = me.ooon.base.option.antToOption(t)

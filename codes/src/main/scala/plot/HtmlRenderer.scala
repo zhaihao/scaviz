@@ -44,11 +44,20 @@ class HtmlRenderer(vega: Vega) extends StrictLogging {
                          |""".stripMargin
 
   private val longId = System.currentTimeMillis()
+  // scaleFactor = 2 导出的图片会放大两倍，缩小 50% 在 高分屏上就会比较清晰
   private val body   = s"""|<body style="text-align: center;">
                          |    <div id="viz$longId"></div>
                          |    <script type="text/javascript">
                          |        var specJson = ${Json.json(vega)};
-                         |        vegaEmbed('#viz$longId', specJson, {theme: '${vega.config.theme}', defaultStyle: true}).catch(console.warn);
+                         |        vegaEmbed(
+                         |          '#viz$longId', 
+                         |          specJson,
+                           |        {
+                         |            theme: '${vega.config.theme}', 
+                         |            defaultStyle: true,
+                         |            scaleFactor : 2
+                         |          }
+                         |        ).catch(console.warn);
                          |    </script>
                          |</body>
                          |""".stripMargin
