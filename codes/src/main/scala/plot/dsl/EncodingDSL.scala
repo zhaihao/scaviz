@@ -47,4 +47,12 @@ trait EncodingDSL {
     this
   }
 
+  def encodeColor(field: String, `type`: FieldType): this.type = {
+    if (encoding.isEmpty)
+      encoding = Encoding(color = Encode(field, `type`))
+    else encoding = encoding.map(_.copy(color = Encode(field, `type`)))
+
+    this
+  }
+
 }

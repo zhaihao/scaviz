@@ -17,7 +17,9 @@ import plot.{AggOp, FieldType, TimeUnit}
   * @version 1.0
   * @since 2019-03-22 17:14
   */
-case class Encoding(x: Option[Encode] = None, y: Option[Encode] = None)
+case class Encoding(x:     Option[Encode] = None,
+                    y:     Option[Encode] = None,
+                    color: Option[Encode] = None)
 
 case class Encode(field:     String,
                   `type`:    FieldType,
