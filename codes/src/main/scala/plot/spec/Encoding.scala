@@ -26,13 +26,27 @@ case class Encode(field:     String,
                   aggregate: Option[AggOp] = None,
                   axis:      Option[Axis] = None,
                   bin:       Option[Boolean] = None,
-                  timeUnit:  Option[TimeUnit] = None)
+                  timeUnit:  Option[TimeUnit] = None,
+                  scale:     Option[Scale] = None,
+                  legend:    Option[Legend] = None)
 
 object FieldType {
   val Nominal:      FieldType = "nominal"      // 离散
   val Quantitative: FieldType = "quantitative" // 数值
   val Ordinal:      FieldType = "ordinal"      // 有序值
   val Temporal:     FieldType = "temporal"     // 时间
+}
+
+case class Scale(domain: Seq[String], range: Seq[String])
+
+case class Legend(title: String)
+
+object Legend {
+  implicit val LegendFormat = Json.format[Legend]
+}
+
+object Scale {
+  implicit val ScaleFormat = Json.format[Scale]
 }
 
 object Encode {

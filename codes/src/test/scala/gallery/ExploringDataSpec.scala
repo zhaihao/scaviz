@@ -8,7 +8,7 @@
 package gallery
 import me.ooon.base.test.BaseSpec
 import plot.spec.encoding.{AggOp, Axis, TimeUnit}
-import plot.spec.{FieldType, Mark}
+import plot.spec.{FieldType, Legend, Mark, Scale}
 
 /**
   * ExploringDataSpec
@@ -95,12 +95,18 @@ class ExploringDataSpec extends BaseSpec {
     plot.vega
       .data(DemoData.Weather)
       .mark(Mark.Bar)
-      .encodeX(field = "date",
-               `type` = FieldType.Ordinal,
+      .encodeX(field    = "date",
+               `type`   = FieldType.Ordinal,
                timeUnit = TimeUnit.Month,
-               axis = Axis(title = "Month of the year"))
+               axis     = Axis(title = "Month of the year"))
       .encodeY(`type` = FieldType.Quantitative, aggregate = AggOp.Count)
-      .encodeColor(field = "weather", `type` = FieldType.Nominal)
+      .encodeColor(
+        field  = "weather",
+        `type` = FieldType.Nominal,
+        scale = Scale(domain = Seq("sun", "fog", "drizzle", "rain", "snow"),
+                      range = Seq("#e7ba52", "#c7c7c7", "#aec7e8", "#1f77b4", "#9467bd")),
+        legend = Legend("Weather type")
+      )
       .html
       .browse
   }

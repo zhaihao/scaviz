@@ -7,7 +7,7 @@
 
 package plot.dsl
 import plot.spec.encoding.Axis
-import plot.spec.{Encode, Encoding}
+import plot.spec.{Encode, Encoding, Legend, Scale}
 import plot.{AggOp, FieldType, TimeUnit}
 
 /**
@@ -47,10 +47,14 @@ trait EncodingDSL {
     this
   }
 
-  def encodeColor(field: String, `type`: FieldType): this.type = {
+  def encodeColor(field:  String,
+                  `type`: FieldType,
+                  scale:  Option[Scale] = None,
+                  legend: Option[Legend] = None): this.type = {
     if (encoding.isEmpty)
-      encoding = Encoding(color = Encode(field, `type`))
-    else encoding = encoding.map(_.copy(color = Encode(field, `type`)))
+      encoding = Encoding(color = Encode(field, `type`, scale = scale, legend = legend))
+    else
+      encoding = encoding.map(_.copy(color = Encode(field, `type`, scale = scale, legend = legend)))
 
     this
   }
