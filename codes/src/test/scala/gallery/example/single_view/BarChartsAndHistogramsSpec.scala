@@ -95,4 +95,9 @@ class BarChartsAndHistogramsSpec extends BaseSpec {
       .html
       .browse
   }
+
+  "Grouped Bar Chart" in {
+    plot.vega
+      .title("Grouped Bar Chart")
+  }
 }
