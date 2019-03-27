@@ -9,7 +9,7 @@ package gallery.example.single_view
 import gallery.DemoData
 import me.ooon.base.test.BaseSpec
 import plot._
-import plot.spec.encoding.{AggOp, Bin}
+import plot.spec.encoding.{AggOp, Axis, Bin, Scale}
 import plot.spec.{FieldType, Mark}
 
 /**
@@ -71,8 +71,8 @@ class BarChartsAndHistogramsSpec extends BaseSpec {
       .title(title = "Histogram (from Binned Data)")
       .data(values = data)
       .mark(Mark.Bar)
-      .encodeX(field  = "bin_start",
-               bin    = Bin(binned = true, step = 2),
+      .encodeX(field = "bin_start",
+               bin = Bin(binned = true, step = 2),
                `type` = FieldType.Quantitative)
       .encodeX2(field = "bin_end")
       .encodeY(field = "count", `type` = FieldType.Quantitative)
@@ -81,9 +81,18 @@ class BarChartsAndHistogramsSpec extends BaseSpec {
   }
 
   "Aggregate Bar Chart" in {
-    plot.vega.title("Aggregate Bar Chart")
+    plot.vega
+      .title("Aggregate Bar Chart")
       .data(url = DemoData.Population)
       .desc("A bar chart showing the US population distribution of age groups in 2000.")
-
+      .filter("datum.year == 2000")
+      .mark(Mark.Bar)
+      .encodeY(field = "age", `type` = FieldType.Ordinal, scale = Scale(rangeStep = 17))
+      .encodeX(field = "people",
+               `type` = FieldType.Quantitative,
+               aggregate = AggOp.Sum,
+               axis = Axis(title = "population"))
+      .html
+      .browse
   }
 }

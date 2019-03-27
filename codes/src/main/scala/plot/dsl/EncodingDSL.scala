@@ -26,10 +26,13 @@ trait EncodingDSL {
               aggregate: Option[AggOp]     = None,
               axis:      Option[Axis]      = None,
               bin:       Option[Bin]       = None,
-              timeUnit:  Option[TimeUnit]  = None): this.type = {
+              timeUnit:  Option[TimeUnit]  = None,
+              scale:     Option[Scale]     = None): this.type = {
     if (encoding.isEmpty)
-      encoding    = Encoding(x = Encode(field, `type`, aggregate, axis, bin, timeUnit))
-    else encoding = encoding.map(_.copy(x = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
+      encoding = Encoding(x = Encode(field, `type`, aggregate, axis, bin, timeUnit, scale))
+    else
+      encoding =
+        encoding.map(_.copy(x = Encode(field, `type`, aggregate, axis, bin, timeUnit, scale)))
 
     this
   }
@@ -52,10 +55,13 @@ trait EncodingDSL {
               aggregate: Option[AggOp]     = None,
               axis:      Option[Axis]      = None,
               bin:       Option[Bin]       = None,
-              timeUnit:  Option[TimeUnit]  = None): this.type = {
+              timeUnit:  Option[TimeUnit]  = None,
+              scale:     Option[Scale]     = None): this.type = {
     if (encoding.isEmpty)
-      encoding    = Encoding(y = Encode(field, `type`, aggregate, axis, bin, timeUnit))
-    else encoding = encoding.map(_.copy(y = Encode(field, `type`, aggregate, axis, bin, timeUnit)))
+      encoding = Encoding(y = Encode(field, `type`, aggregate, axis, bin, timeUnit, scale))
+    else
+      encoding =
+        encoding.map(_.copy(y = Encode(field, `type`, aggregate, axis, bin, timeUnit, scale)))
 
     this
   }

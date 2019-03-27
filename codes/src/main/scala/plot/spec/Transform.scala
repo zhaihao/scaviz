@@ -7,7 +7,7 @@
 
 package plot.spec
 import play.api.libs.json.{JsValue, Writes}
-import plot.spec.transform.Calculate
+import plot.spec.transform.{Calculate, Filter}
 
 /**
   * Transform
@@ -23,6 +23,7 @@ object Transform {
   implicit val TransformWrite = new Writes[Transform] {
     override def writes(o: Transform): JsValue = o match {
       case a: Calculate => Calculate.CalculateFormat.writes(a)
+      case a: Filter    => Filter.FilterFormat.writes(a)
       case _ => throw new Exception("transform is unsupported!")
     }
   }

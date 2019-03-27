@@ -8,7 +8,7 @@
 package plot.dsl
 import plot._
 import plot.spec.Transform
-import plot.spec.transform.Calculate
+import plot.spec.transform.{Calculate, Filter}
 
 /**
   * TransformDSL
@@ -25,6 +25,14 @@ trait TransformDSL {
     if (transform.isEmpty) this.transform = Seq.empty[Transform]
 
     transform = transform.map(_ :+ Calculate(calculate, as))
+
+    this
+  }
+
+  def filter(filter: String): this.type = {
+    if (transform.isEmpty) this.transform = Seq.empty[Transform]
+
+    transform = transform.map(_ :+ Filter(filter))
 
     this
   }
