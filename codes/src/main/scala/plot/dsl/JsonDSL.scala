@@ -6,7 +6,9 @@
  */
 
 package plot.dsl
+import play.api.libs.json.{JsObject, JsString, Json}
 import plot._
+import plot.spec.Data
 
 /**
   * JsonDSL
@@ -16,10 +18,14 @@ import plot._
   * @since 2019-03-27 17:58
   */
 trait JsonDSL {
-  protected var json: Option[String] = None
+  var json: Option[String] = None
 
-  def json(json: String): this.type = {
-    this.json = json
+  def json(json: String, data: Data): this.type = {
+    this.json = Json.prettyPrint(
+      Json.parse(json).as[JsObject]
+        + ("data", Json.toJson(data))
+    )
+
     this
   }
 

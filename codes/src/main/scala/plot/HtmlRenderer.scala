@@ -25,7 +25,9 @@ import play.api.libs.json.Json
   */
 class HtmlRenderer(vega: Vega) extends StrictLogging {
 
-  logger.debug("\n" + Json.json(vega))
+  val spec = vega.json.getOrElse(Json.json(vega))
+
+  logger.debug("\n" + spec)
 
   private val style = """|<style>
                          |    #vg-tooltip-element table {
@@ -45,14 +47,14 @@ class HtmlRenderer(vega: Vega) extends StrictLogging {
 
   private val longId = System.currentTimeMillis()
   // scaleFactor = 2 导出的图片会放大两倍，缩小 50% 在 高分屏上就会比较清晰
-  private val body   = s"""|<body style="text-align: center;">
+  private val body = s"""|<body style="text-align: center;">
                          |    <div id="viz$longId"></div>
                          |    <script type="text/javascript">
-                         |        var specJson = ${Json.json(vega)};
+                         |        var specJson = $spec;
                          |        vegaEmbed(
                          |          '#viz$longId', 
                          |          specJson,
-                           |        {
+                         |        {
                          |            theme: '${vega.config.theme}', 
                          |            defaultStyle: true,
                          |            scaleFactor : 2

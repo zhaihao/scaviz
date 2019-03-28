@@ -24,9 +24,8 @@ case class Vega(width: Option[Int] = None, height: Option[Int] = None)
     with EncodingDSL
     with TitleDSL
     with TransformDSL
-    with DescriptionDSL {
-  val schema = s"https://vega.github.io/schema/vega-lite/$SCHEMA_VERSION.json"
-}
+    with DescriptionDSL
+    with JsonDSL
 
 case class Title(text:       Option[String]      = None,
                  anchor:     Option[TitleAnchor] = None,
@@ -71,7 +70,7 @@ object Vega {
   implicit val VegaWrite = new Writes[Vega] {
     override def writes(o: Vega) =
       JsObject(
-        Seq("$schema"                 -> JsString(o.schema)) ++
+        Seq("$schema"                 -> JsString(plot.schema)) ++
           o.width.map("width"         -> JsNumber(_)) ++
           o.height.map("height"       -> JsNumber(_)) ++
           o.title.map("title"         -> Json.toJson(_)) ++

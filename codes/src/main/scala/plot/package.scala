@@ -25,6 +25,7 @@ package object plot {
   val VEGA_LITE_VERSION = "3.0.0"
   val VEGA_EMBED        = "4.0.0-rc1"
   val SCHEMA_VERSION    = "v3"
+  val schema            = s"https://vega.github.io/schema/vega-lite/$SCHEMA_VERSION.json"
   // 入口
   def vega(width: Option[Int] = None, height: Option[Int] = None) = Vega(width, height)
   def vega = Vega()
