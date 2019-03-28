@@ -24,15 +24,8 @@ cancelable in Global := true
 
 lazy val root = (project in file("."))
   .settings(
-    moduleName    := "scaviz",
-    name          := "scaviz",
-    sourcesInBase := false
-  )
-
-lazy val codes = (project in file("codes"))
-  .settings(
-    moduleName := "codes",
-    name       := "scaviz - Code Sources",
+    moduleName := "scaviz",
+    name       := "scaviz",
     libraryDependencies ++= Seq().flatten,
     libraryDependencies ++= Seq(play_json, os_lib),
     scalacOptions in (Compile, doc) ++= Seq(
@@ -40,7 +33,7 @@ lazy val codes = (project in file("codes"))
       "-implicits",
       "-groups",
       "-doc-title",
-      (description in root).value,
+      description.value,
       "-doc-version",
       scalaVersion.value,
       "-sourcepath",
@@ -50,7 +43,7 @@ lazy val codes = (project in file("codes"))
     )
   )
 
-val CODES = config("codes")
+val ROOT = config("root")
 lazy val docs = (project in file("docs"))
   .enablePlugins(SiteScaladocPlugin, ParadoxSitePlugin, ParadoxMaterialThemePlugin, GhpagesPlugin)
   .settings(
@@ -89,5 +82,5 @@ lazy val docs = (project in file("docs"))
     },
     autoAPIMappings := true,
     SiteScaladocPlugin
-      .scaladocSettings(CODES, mappings in (Compile, packageDoc) in codes, "api/"),
+      .scaladocSettings(ROOT, mappings in (Compile, packageDoc) in root, "api/"),
   )
